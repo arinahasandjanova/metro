@@ -142,7 +142,7 @@ void start_trains(int red_trains, int green_trains, int purple_trains, int lime_
 
 int main() {
     std::map<std::string, std::vector<std::unique_ptr<Station>>> stations;
-    create_stations_from_json("stations.json", stations);
+    create_stations_from_json("../stations.json", stations);
 
     if (stations.empty()) {
         std::cerr << "Error: No stations loaded from stations.json" << std::endl;
