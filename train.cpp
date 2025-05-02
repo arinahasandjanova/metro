@@ -24,21 +24,21 @@ void Train::arrive_at_station(const Station& station, Clock& clock, std::ofstrea
     std::string branch_color = station.get_branch() == Branch::RED ? "red" :
                               station.get_branch() == Branch::GREEN ? "green" :
                               station.get_branch() == Branch::PURPLE ? "purple" : "lime";
-    log_file << "<p><span style='color:yellow'>" << time << "</span> Train <span style='color:blue'>" << id
+    log_file << "<p>Train <span style='color:blue'>" << id
              << "</span> arrived at station <span style='color:" << branch_color << "'>" << station.get_name()
              << "</span><p>\n" << std::flush;
-    //std::cerr << "Logged arrival for train " << id << " at " << station.get_name() << " at " << time << std::endl;
+    //std::cout << "Logged arrival for train " << id << " at " << station.get_name() << " at " << time << std::endl;
 
     clock.add_seconds(station.get_wait_time());
     std::this_thread::sleep_for(std::chrono::milliseconds(station.get_wait_time()));
 
     std::string next_station = station.get_next_station(direction);
     if (!next_station.empty()) {
-        time = clock.get_time();
-        log_file << "<p><span style='color:yellow'>" << time << "</span> Train <span style='color:blue'>" << id
+        //time = clock.get_time();
+        log_file << "<p>Train <span style='color:blue'>" << id
                  << "</span> departing from <span style='color:" << branch_color << "'>" << station.get_name()
                  << "</span> to <span style='color:" << branch_color << "'>" << next_station << "</span><p>\n" << std::flush;
-        //std::cerr << "Logged departure for train " << id << " from " << station.get_name() << " to " << next_station << " at " << time << std::endl;
+        //std::cout << "Logged departure for train " << id << " from " << station.get_name() << " to " << next_station << " at " << time << std::endl;
     }
     station.unlock_mutex(direction);
 }
