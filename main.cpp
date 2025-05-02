@@ -42,7 +42,7 @@ void run_metro(const std::map<std::string, std::vector<std::unique_ptr<Station>>
 
         if (clock.is_after_midnight() && !after_midnight) {
             after_midnight = true;
-            std::cerr << "Midnight reached, directing trains to depots\n";
+            std::cout << "Midnight reached, directing trains to depots\n";
         }
 
         for (auto& state : train_states) {
@@ -69,14 +69,13 @@ void run_metro(const std::map<std::string, std::vector<std::unique_ptr<Station>>
             log_files[current_branch_name] << std::flush;
 
             if (after_midnight && current_station->is_depot_station()) {
-                std::cerr << "Train " << train.get_id() << " reached depot " << current_station_name << ". Stopping.\n";
+                std::cout << "Train " << train.get_id() << " reached depot " << current_station_name << ". Stopping.\n";
                 continue;
             }
 
             std::string next_station = current_station->get_next_station(train.get_direction());
 
             if (next_station.empty()) {
-                // At end of line, need to change direction
                 if (current_station->is_last_station() || current_station->is_depot_station()) {
                     train.change_direction();
                     next_station = current_station->get_next_station(train.get_direction());
@@ -91,11 +90,10 @@ void run_metro(const std::map<std::string, std::vector<std::unique_ptr<Station>>
                 }
             }
 
-            // Handle branch transition
             auto [trans_branch, trans_station] = current_station->get_transition();
             if (!trans_branch.empty() && next_station == trans_station) {
                 std::string time = clock.get_time();
-                log_files[current_branch_name] << "<p><span style='color:yellow'>" << time << "</span> Train <span style='color:blue'>"
+                log_files[current_branch_name] << "<p>Train <span style='color:blue'>"
                                                << train.get_id() << "</span> transitioning to <span style='color:" << trans_branch
                                                << "'>" << trans_station << "</span> on " << trans_branch << " branch<p>\n";
                 current_branch_name = trans_branch;
@@ -106,7 +104,6 @@ void run_metro(const std::map<std::string, std::vector<std::unique_ptr<Station>>
                 );
             }
 
-            // Move train forward
             current_station_name = next_station;
             remaining_trains.push_back({train, current_station_name, current_branch_name});
             train_offset++;
@@ -139,7 +136,7 @@ void start_trains(int red_trains, int green_trains, int purple_trains, int lime_
     for (int i = 0; i < purple_trains; ++i) trains.emplace_back(Branch::PURPLE);
     for (int i = 0; i < lime_trains; ++i) trains.emplace_back(Branch::LIME);
 
-    std::cerr << "Starting " << trains.size() << " trains in single-threaded mode" << std::endl;
+    std::cout << "Starting " << trains.size() << " trains in single-threaded mode" << std::endl;
     run_metro(stations, trains, clock);
 }
 
@@ -151,7 +148,7 @@ int main() {
         std::cerr << "Error: No stations loaded from stations.json" << std::endl;
         return 1;
     }
-    std::cerr << "Loaded " << stations.size() << " branches from stations.json" << std::endl;
+    std::cout << "Loaded " << stations.size() << " branches from stations.json" << std::endl;
 
     int red_trains, green_trains, purple_trains, lime_trains;
     std::cout << "Enter number of trains for Red branch: ";
@@ -166,6 +163,6 @@ int main() {
     Clock clock;
     start_trains(red_trains, green_trains, purple_trains, lime_trains, stations, clock);
 
-    std::cerr << "Simulation completed" << std::endl;
+    std::cout << "Simulation completed" << std::endl;
     return 0;
 }
