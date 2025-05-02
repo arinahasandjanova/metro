@@ -16,7 +16,6 @@ int Station::get_wait_time() const { return wait_time; }
 std::pair<std::string, std::string> Station::get_transition() const { return transition; }
 
 std::string Station::get_next_station(bool direction) const {
-    // Handle fork stations
     if (is_fork && !fork_distribution.empty()) {
         std::random_device rd;
         std::mt19937 gen(rd());
@@ -40,14 +39,12 @@ std::string Station::get_next_station(bool direction) const {
     auto [trans_branch, trans_station] = transition;
     if (!trans_branch.empty() && !trans_station.empty()) {
         if (!direction && !next_stations.empty() && next_stations[0] == trans_station) {
-            return trans_station; // e.g., 28 May to Nizami (forward)
+            return trans_station;
         }
         if (direction && !prev_stations.empty() && prev_stations[0] == trans_station) {
-            return trans_station; // e.g., Nizami to 28 May (backward)
+            return trans_station;
         }
     }
-
-    // Default: return the first station in the appropriate direction
     if (direction && !prev_stations.empty()) {
         return prev_stations[0];
     }
