@@ -1,0 +1,259 @@
+{
+  "branches": {
+    "red": [
+      {
+        "name": "Bakmil",
+        "is_depot": true,
+        "is_fork": false,
+        "is_last": true,
+        "next_stations": ["Nariman Narimanov"],
+        "prev_stations": [],
+        "wait_time": 120
+      },
+      {
+        "name": "Icheri Sheher",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": true,
+        "next_stations": [],
+        "prev_stations": ["Sahil"],
+        "wait_time": 120
+      },
+      {
+        "name": "Sahil",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Icheri Sheher"],
+        "prev_stations": ["28 May"],
+        "wait_time": 90
+      },
+      {
+        "name": "28 May",
+        "is_depot": false,
+        "is_fork": true,
+        "is_last": false,
+        "next_stations": ["Sahil", "Nizami"],
+        "prev_stations": ["Gangjlik"],
+        "wait_time": 120,
+        "fork_distribution": [0.5, 0.5],
+        "transition_to": {"branch": "green", "station": "Nizami"}
+      },
+      {
+        "name": "Gangjlik",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["28 May"],
+        "prev_stations": ["Nariman Narimanov"],
+        "wait_time": 90
+      },
+      {
+        "name": "Nariman Narimanov",
+        "is_depot": false,
+        "is_fork": true,
+        "is_last": false,
+        "next_stations": ["Gangjlik"],
+        "prev_stations": ["Bakmil", "Ulduz"],
+        "wait_time": 120,
+        "fork_distribution": [0.25, 0.75]
+      },
+      {
+        "name": "Ulduz",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Nariman Narimanov"],
+        "prev_stations": ["Koroqlu"],
+        "wait_time": 90
+      },
+      {
+        "name": "Koroqlu",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Ulduz"],
+        "prev_stations": ["Qara Qarayev"],
+        "wait_time": 90
+      },
+      {
+        "name": "Qara Qarayev",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Koroqlu"],
+        "prev_stations": ["Neftchiler"],
+        "wait_time": 90
+      },
+      {
+        "name": "Neftchiler",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Qara Qarayev"],
+        "prev_stations": ["Xalqlar Dostluqu"],
+        "wait_time": 90
+      },
+      {
+        "name": "Xalqlar Dostluqu",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Neftchiler"],
+        "prev_stations": ["Axmedli"],
+        "wait_time": 90
+      },
+      {
+        "name": "Axmedli",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Xalqlar Dostluqu"],
+        "prev_stations": ["Hezi Aslanov"],
+        "wait_time": 90
+      },
+      {
+        "name": "Hezi Aslanov",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": true,
+        "next_stations": ["Axmedli"],
+        "prev_stations": [],
+        "wait_time": 150
+      }
+    ],
+    "green": [
+      {
+        "name": "Nizami",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Elmlar Akademiyasi"],
+        "prev_stations": ["28 May"],
+        "wait_time": 90,
+        "transition_to": {"branch": "red", "station": "28 May"}
+      },
+      {
+        "name": "Elmlar Akademiyasi",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Inshatchilar"],
+        "prev_stations": ["Nizami"],
+        "wait_time": 90
+      },
+      {
+        "name": "Inshatchilar",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["20 Yanvar"],
+        "prev_stations": ["Elmlar Akademiyasi"],
+        "wait_time": 90
+      },
+      {
+        "name": "20 Yanvar",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Memar Ajami"],
+        "prev_stations": ["Inshatchilar"],
+        "wait_time": 90
+      },
+      {
+        "name": "Memar Ajami",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Nasimi"],
+        "prev_stations": ["20 Yanvar"],
+        "wait_time": 90
+      },
+      {
+        "name": "Nasimi",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Azadliq"],
+        "prev_stations": ["Memar Ajami"],
+        "wait_time": 90
+      },
+      {
+        "name": "Azadliq",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Darnaqul"],
+        "prev_stations": ["Nasimi"],
+        "wait_time": 90
+      },
+      {
+        "name": "Darnaqul",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": true,
+        "next_stations": [],
+        "prev_stations": ["Azadliq"],
+        "wait_time": 90
+      }
+    ],
+    "purple": [
+      {
+        "name": "8 noyabr",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": true,
+        "next_stations": [],
+        "prev_stations": ["Memar Ajami p"],
+        "wait_time": 120
+      },
+      {
+        "name": "Memar Ajami p",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["8 noyabr"],
+        "prev_stations": ["Avtovagzal"],
+        "wait_time": 120
+      },
+      {
+        "name": "Avtovagzal",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": false,
+        "next_stations": ["Memar Ajami p"],
+        "prev_stations": ["Khojasan"],
+        "wait_time": 90
+      },
+      {
+        "name": "Khojasan",
+        "is_depot": true,
+        "is_fork": false,
+        "is_last": true,
+        "next_stations": ["Avtovagzal"],
+        "prev_stations": [],
+        "wait_time": 180
+      }
+    ],
+    "lime": [
+      {
+        "name": "Jafar Jabbarly",
+        "is_depot": true,
+        "is_fork": false,
+        "is_last": true,
+        "next_stations": ["Xatai"],
+        "prev_stations": [],
+        "wait_time": 90
+      },
+      {
+        "name": "Xatai",
+        "is_depot": false,
+        "is_fork": false,
+        "is_last": true,
+        "next_stations": ["Jafar Jabbarly"],
+        "prev_stations": [],
+        "wait_time": 120
+      }
+    ]
+  }
+}
